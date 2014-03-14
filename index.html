@@ -4,11 +4,18 @@
 <head>
     <meta charset="utf-8">
     <title>模板引擎初探-初探</title>
-    <link rel="stylesheet" href="app/assets/style.css">
 </head>
 
 <body>
     <script>
+    var template = "我喜欢{{what}}";
+    var data = {
+    	"what":"美女"
+    }
+    var result = template.replace(/{{(\w+)}}/g,function(a,b){
+    	return data[b];
+    })
+    console.log(result)
     </script>
 </body>
 
