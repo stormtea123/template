@@ -8,17 +8,10 @@
 
 <body>
 	<h2>简单数据</h2>
-    <script>
-    var template = "我喜欢{{what}}，年龄在{{age}}之间";
-    var data = {
-    	"what":"美女",
-    	"age":"18-28"
-    }
-    var result = template.replace(/{{(\w+)}}/g,function(a,b){
-    	return data[b];
-    })
-    console.log(result)
-    </script>
+    <ul>
+        <li><a href="/template/step-1.html">简单数据</a></li>
+        <li><a href="/template/step-1.html">数组数据</a></li>
+    </ul>
 </body>
 
 </html>
