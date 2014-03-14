@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>数组数据-模板引擎</title>
+</head>
+<body>
+    <h2>数组数据</h2>
+    <ul id="love"></ul>
+    <script>
+    var template = "<li>我喜欢{{name}}，年龄{{age}}，和我很配</li>";
+    var data = [{
+        "name": "小芳",
+        "age": "18"
+    }, {
+        "name": "小丽",
+        "age": "25"
+    }, {
+        "name": "小妮",
+        "age": "28"
+    }, {
+        "name": "小静",
+        "age": "24"
+    }]
+    var len = data.length;
+    var dataArray = [];
+    for (var i = 0; i < len; i++) {
+        var result = template.replace(/{{(\w+)}}/g, function(a, b) {
+            return data[i][b];
+        })
+        dataArray.push(result);
+    }
+    console.log(dataArray.join(""));
+    document.getElementById("love").innerHTML = dataArray.join("");
+    </script>
+</body>
+
+</html>
