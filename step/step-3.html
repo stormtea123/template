@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>改进-模板引擎</title>
+</head>
+<body>
+    <h2>改进</h2>
+    <h3 id="love"></h3>
+    <ul id="love-list"></ul>
+    <script type="text/html" id="template-list">
+        <li>我喜欢{{name}}，年龄{{age}}，和我很配</li> 
+    </script>
+    <script type="text/html" id="template">
+        我喜欢{{what}}，年龄在{{age}}之间
+    </script>
+    <script>
+    function heredoc(func) {
+        return (func+"").replace(/^[^*]*\/\*|\*\/[^*]*$/g,"").replace(/\s*^\s*/mg,"")
+    }
+    //判断数组
+    if(!Array.isArray) {
+      Array.isArray = function(arg) {
+        return Object.prototype.toString.call(arg) === '[object Array]';
+      };
+    }
+    var data = {
+        "what":"美女",
+        "age":"18-28"
+    }
+    var dataList = [{
+        "name": "小芳",
+        "age": "18"
+    }, {
+        "name": "小丽",
+        "age": "25"
+    }, {
+        "name": "小妮",
+        "age": "28"
+    }, {
+        "name": "小静",
+        "age": "24"
+    }]
+    //模板引擎
+    function templateEngine(element, data, template){
+        var template = document.getElementById(template).innerHTML;
+        var element = document.getElementById(element);
+        var templateFormat = template.replace(/^\s*/gm,"").replace(/\n/gm,"");
+        if (Array.isArray(data)){
+            var len = data.length;
+            var dataArray = [];
+            for (var i = 0; i < len; i++) {
+                var result = templateFormat.replace(/{{(\w+)}}/g, function(a, b) {
+                    return data[i][b];
+                })
+                dataArray.push(result);
+            }
+            //console.log(dataArray)
+            element.innerHTML = dataArray.join("");
+        } else {
+            var result = template.replace(/{{(\w+)}}/g,function(a,b){
+                return data[b];
+            })
+            element.innerHTML = result;
+        }
+    }
+    templateEngine("love",data,"template");
+    templateEngine("love-list",dataList,"template-list");
+
+    </script>
+</body>
+
+</html>

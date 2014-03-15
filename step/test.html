@@ -1,0 +1,13 @@
+<div class="b">123</div>
+<script>
+function heredoc(func) {
+    //除*以外+匹配/*或者*/+除*以外
+    //替换任意红白符
+    return (func+"").replace(/^[^*]*\/\*|\*\/[^*]*$/g,"").replace(/\s*^\s*/mg,"")
+}
+var target = function(){
+	/* .b { width:100px; height:100px; background:red; }   */
+}
+console.log(heredoc(target));
+console.log(".b { width:100px; height:100px; background:red; }");
+</script>
